@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="{% static 'css/answer.css' %}">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <title>Weather</title>
+</head>
+
+<body>
+  <div class = container>
+      <h2>天気情報サイト</h2>
+      <form action="{% url 'weather' %}" method="post">
+        {% csrf_token %}
+        <select name = "local">
+          <option value="" selected>地点を選択してください</option>
+          <option value="ube">宇部市</option>
+          <option value="simonoseki">下関市</option>
+          <option value="yamaguchi">山口市</option>
+          <option value="iwakuni">岩国市</option>
+          <option value="tokuyama">徳山市</option>
+        </select>
+        <input class="btn solid" type="submit" value="送信" name="start_button">
+      </form>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/weather.css' %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <title>{{title}}の天気</title>
+    <script>
+        var tem_alert = "{{tem_alert}}"
+        var hum_alert = "{{hum_alert}}"
+        if(tem_alert ==1){
+            window.alert("気温が35°Cを超えています！\n暑さ注意！\n熱中症に注意してください！");
+        }
+        if(hum_alert ==1){
+            window.alert("湿度が50%を下回っています！\n乾燥に注意してください！\n火の取り扱いに注意してください！");
+        }
+    </script>
+</head>
+<body>
+    <h3  style="text-align:right;">現在時刻　{{year}}年 {{month}}月 {{day}}日 {{hour}}時 {{min}}分</h3>
+    <dev class = container>
+        <h1>{{title}}の天気
+            <br>
+            <img src="/media/images/{{weather}}.png" style="width:100px;"/>
+            {{tem}}°C
+            <h3>
+                湿度：{{hum}}%
+                気圧：{{atm}}hpa
+            </h3>
+        </h1>
+        <form action="{% url 'wea_db' %}" method="post">
+            {% csrf_token %}
+            <input type="date" name="calendar">
+            <button class="btn solid" type="submit" value={{title}} name=button>過去の天気</button>
+        </form>
+        <br>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <input class="btn solid" type="submit" value="ホームに戻る" name="start_button">
+        </form>
+    </dev>
+</body>
+</html>
